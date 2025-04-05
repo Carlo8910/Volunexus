@@ -3,20 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Volunteer Map Platform</title>
+  <title>VolunExus - Your Volunteering Adventure</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="stylesheet" href="/css/achievements.css">
   {{#if mapApiKey}}
   <script src="https://maps.googleapis.com/maps/api/js?key={{mapApiKey}}&libraries=places"></script>
   {{/if}}
+  <!-- GSAP Animation library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
 </head>
-<body class="bg-gray-50 flex flex-col min-h-screen">
-  {{> _header}}
+<body class="flex flex-col min-h-screen text-white">
+  <!-- Gaming Themed Header -->
+  <header class="game-header text-white shadow-lg">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold flex items-center">
+        <div class="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-lg flex items-center justify-center mr-3 shadow-lg transform rotate-12">
+          <i class="fas fa-seedling text-white text-xl"></i>
+        </div>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-400 text-3xl">VolunExus</span>
+      </a>
+      
+      <nav>
+        <ul class="flex space-x-4">
+          <li><a href="/opportunities" class="nav-item">
+            <i class="fas fa-compass text-blue-300"></i> Quests
+          </a></li>
+          <li><a href="/leaderboard" class="nav-item">
+            <i class="fas fa-trophy text-yellow-300"></i> Rankings
+          </a></li>
+          <li><a href="/dashboard" class="nav-item">
+            <i class="fas fa-user text-green-300"></i> Hero
+          </a></li>
+          {{#if user}}
+          <li><a href="/auth/logout" class="nav-item">
+            <i class="fas fa-sign-out-alt text-red-300"></i> Exit
+          </a></li>
+          {{else}}
+          <li><a href="/auth/login" class="nav-item">
+            <i class="fas fa-sign-in-alt text-green-300"></i> Join
+          </a></li>
+          {{/if}}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
   <main class="container mx-auto py-6 px-4 flex-grow">
     {{{body}}}
   </main>
-  {{> _footer}}
 
+  <!-- Gaming Themed Footer -->
+  <footer class="game-footer text-white py-6">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <a href="/" class="text-xl font-bold flex items-center">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-400">Volun<span class="text-purple-300">Exus</span></span>
+          </a>
+          <p class="text-sm text-blue-300 mt-1">Your Volunteering Adventure Awaits</p>
+        </div>
+        
+        <div class="flex space-x-8">
+          <div>
+            <h3 class="font-semibold mb-2 text-green-300">ADVENTURE MENU</h3>
+            <ul class="text-sm space-y-1">
+              <li><a href="/" class="text-blue-300 hover:text-green-300 transition-colors flex items-center"><i class="fas fa-home mr-1"></i> Home Base</a></li>
+              <li><a href="/opportunities" class="text-blue-300 hover:text-green-300 transition-colors flex items-center"><i class="fas fa-scroll mr-1"></i> Quest Board</a></li>
+              <li><a href="/map" class="text-blue-300 hover:text-green-300 transition-colors flex items-center"><i class="fas fa-map mr-1"></i> Realm Map</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-indigo-700 mt-6 pt-6 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-sm text-blue-300">&copy; 2025 VolunExus. All rights reserved. <span class="text-xs">+5 XP for reading the footer</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript -->
   <script src="/js/main.js"></script>
+  <script src="/js/map.js"></script>
+  <script src="/js/opportunity.js"></script>
+  <script src="/js/achievements.js"></script>
+  
+  <!-- Animation script -->
+  <script>
+    // Simple animations for the gamified elements
+    document.addEventListener('DOMContentLoaded', function() {
+      // Animate rank badge
+      gsap.to('.rank-badge', {
+        duration: 0.5,
+        scale: 1.05,
+        repeat: 1,
+        yoyo: true,
+        delay: 1
+      });
+      
+      // Animate progress bars
+      gsap.from('.progress-bar-fill', {
+        width: 0,
+        duration: 1.5,
+        ease: 'power2.out',
+        stagger: 0.1
+      });
+      
+      // Animate stat cards
+      gsap.from('.stat-card', {
+        y: 20,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'back.out(1.7)'
+      });
+    });
+  </script>
 </body>
 </html> 

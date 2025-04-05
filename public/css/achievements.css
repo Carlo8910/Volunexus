@@ -1,0 +1,125 @@
+/* Achievement Styles */
+.achievement-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.achievement-icon::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.achievement-icon:hover::after {
+  opacity: 0.3;
+  animation: rotate 2s infinite linear;
+}
+
+.achievement-icon:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Achievement Colors */
+.achievement-first_event {
+  background-color: #10b981;
+  border: 3px solid #065f46;
+}
+
+.achievement-hometown_hero {
+  background-color: #8b5cf6;
+  border: 3px solid #5b21b6;
+}
+
+.achievement-dedication {
+  background-color: #3b82f6; 
+  border: 3px solid #1e40af;
+}
+
+.achievement-category_master {
+  background-color: #eab308;
+  border: 3px solid #854d0e;
+}
+
+.achievement-streaker {
+  background-color: #ef4444;
+  border: 3px solid #b91c1c;
+}
+
+.achievement-night_owl {
+  background-color: #4f46e5;
+  border: 3px solid #312e81;
+}
+
+.achievement-early_bird {
+  background-color: #f59e0b;
+  border: 3px solid #92400e;
+}
+
+/* Achievement Badge Effect */
+.achievement-badge-effect {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #f59e0b, #eab308);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #78350f;
+  font-weight: bold;
+  font-size: 10px;
+  border: 2px solid #92400e;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Locked Achievement Style */
+.achievement-locked {
+  filter: grayscale(100%);
+  opacity: 0.5;
+  border: 3px solid #4b5563;
+  box-shadow: none;
+}
+
+.achievement-locked::before {
+  content: '\f023';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: #e5e7eb;
+  z-index: 1;
+} 

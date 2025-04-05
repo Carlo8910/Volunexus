@@ -94,4 +94,50 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 4000);
     });
   }
+  
+  // Handle animations for progressive reveal
+  const animatedItems = document.querySelectorAll('.animated-item');
+  
+  if (animatedItems.length) {
+    // Use IntersectionObserver if supported
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      // Set initial state and observe
+      animatedItems.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+        observer.observe(item);
+      });
+    } else {
+      // Fallback for browsers without IntersectionObserver
+      animatedItems.forEach(item => {
+        item.style.opacity = '1';
+        item.style.transform = 'translateY(0)';
+      });
+    }
+  }
+  
+  // Initialize progress bars with animation
+  const progressBars = document.querySelectorAll('.progress-bar .progress');
+  
+  if (progressBars.length) {
+    progressBars.forEach(bar => {
+      const width = bar.style.width;
+      bar.style.width = '0';
+      
+      setTimeout(() => {
+        bar.style.width = width;
+      }, 300);
+    });
+  }
 }); 

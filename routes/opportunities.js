@@ -198,11 +198,72 @@ router.put('/attend/:id', ensureAuth, async (req, res) => {
     opportunity.attendees.push(req.user.id);
     await opportunity.save();
     
-    // Add opportunity to user's attended events
+    // Load gameification config
+    const { achievements } = require('../config/ranks');
+    
+    // Add opportunity to user's attended events and update points
     const user = await User.findById(req.user.id);
+    
+    // Add to attended events
     user.attendedEvents.push(opportunity.id);
-    user.points += opportunity.duration * 10; // 10 points per hour
-    await user.save();
+    
+    // Update stats
+    await user.updateStats(opportunity.duration);
+    
+    // Add points with category
+    await user.addPoints(opportunity.duration * 10, opportunity.tag);
+    
+    // Check and add achievements
+    // First event achievement
+    if (user.stats.eventsAttended === 1) {
+      const firstEventAchievement = achievements.find(a => a.id === 'first_event');
+      if (firstEventAchievement) {
+        await user.addAchievement(firstEventAchievement);
+      }
+    }
+    
+    // Category master achievement - check if they've done all categories
+    const uniqueCategories = new Set();
+    // Get attended events with populated data
+    const attendedOpportunities = await Opportunity.find({
+      _id: { $in: user.attendedEvents }
+    }).select('tag');
+    
+    // Count unique categories
+    attendedOpportunities.forEach(op => {
+      if (op.tag) uniqueCategories.add(op.tag);
+    });
+    
+    if (uniqueCategories.size >= 5) {
+      const categoryMasterAchievement = achievements.find(a => a.id === 'category_master');
+      if (categoryMasterAchievement) {
+        await user.addAchievement(categoryMasterAchievement);
+      }
+    }
+    
+    // Hometown hero achievement - 10 events
+    if (user.stats.eventsAttended >= 10) {
+      const hometownHeroAchievement = achievements.find(a => a.id === 'hometown_hero');
+      if (hometownHeroAchievement) {
+        await user.addAchievement(hometownHeroAchievement);
+      }
+    }
+    
+    // Dedication achievement - 100 hours
+    if (user.stats.totalHours >= 100) {
+      const dedicationAchievement = achievements.find(a => a.id === 'dedication');
+      if (dedicationAchievement) {
+        await user.addAchievement(dedicationAchievement);
+      }
+    }
+    
+    // Consistent helper achievement - streak of 4 (weekly for a month)
+    if (user.stats.currentStreak >= 4) {
+      const consistentHelperAchievement = achievements.find(a => a.id === 'consistent_helper');
+      if (consistentHelperAchievement) {
+        await user.addAchievement(consistentHelperAchievement);
+      }
+    }
     
     res.redirect(`/opportunities/${req.params.id}`);
   } catch (err) {
