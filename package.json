@@ -1,0 +1,37 @@
+{
+  "name": "diamondhacks",
+  "version": "1.0.0",
+  "description": "A volunteer opportunity map platform",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "volunteer",
+    "map",
+    "nodejs",
+    "mongodb",
+    "express",
+    "auth0"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.1",
+    "express-session": "^1.18.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.13.2",
+    "passport": "^0.7.0",
+    "passport-auth0": "^1.4.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

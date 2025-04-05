@@ -1,0 +1,18 @@
+<header class="bg-white shadow">
+  <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+    <div>
+      <a href="/" class="text-xl font-bold text-green-600">VolunteerMap</a>
+    </div>
+    <div class="flex space-x-4">
+      <a href="/map" class="text-gray-700 hover:text-green-600">Map</a>
+      <a href="/leaderboard" class="text-gray-700 hover:text-green-600">Leaderboard</a>
+      {{#if user}}
+        <a href="/dashboard" class="text-gray-700 hover:text-green-600">Dashboard</a>
+        <a href="/users/profile" class="text-gray-700 hover:text-green-600">Profile</a>
+        <a href="/auth/logout" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded">Logout</a>
+      {{else}}
+        <a href="/auth/login" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded">Login</a>
+      {{/if}}
+    </div>
+  </nav>
+</header> 
