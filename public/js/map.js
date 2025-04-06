@@ -7,9 +7,8 @@ let currentLocationMarker;
 
 /**
  * Initializes the Google Map, adds markers, and sets up filters.
- * Assign to window scope for Google Maps callback.
  */
-window.initMap = function() {
+function initMap() {
   if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
     console.error('Google Maps API is not loaded.');
     document.getElementById('map').innerHTML = '<p class="text-red-500 text-center">Map could not be loaded. Ensure Google Maps API is included.</p>';
@@ -47,7 +46,23 @@ window.initMap = function() {
   
   // --- Initial Display --- 
   displayOpportunities(); // Display initially loaded opportunities
-}; // End of window.initMap assignment
+}
+
+/**
+ * Google Maps API callback function.
+ * This is what Google will call when the API is loaded.
+ */
+window.initMapOnLoad = function() {
+  console.log('Google Maps API loaded, initializing map via callback');
+  if (document.getElementById('map')) {
+    initMap();
+  } else {
+    console.log('Map element not found, may be on a different page');
+  }
+};
+
+// Also expose initMap globally in case it's needed directly
+window.initMap = initMap;
 
 /**
  * Clears existing markers and adds new ones based on current filters.
@@ -56,7 +71,6 @@ function displayOpportunities() {
   clearMarkers(); // Clear existing markers from map
 
   const searchTerm = document.getElementById('search-term')?.value.toLowerCase() || '';
-  const tagFilter = document.getElementById('tag-filter')?.value || '';
 
   const filteredOpportunities = allOpportunityData.filter(opp => {
     // Basic coordinate check
@@ -64,13 +78,14 @@ function displayOpportunities() {
         return false;
     }
     
-    const matchesTag = !tagFilter || opp.tag === tagFilter;
+    // Check if opportunity matches search term
     const matchesSearch = !searchTerm || 
                          (opp.title && opp.title.toLowerCase().includes(searchTerm)) || 
                          (opp.description && opp.description.toLowerCase().includes(searchTerm)) ||
-                         (opp.location && opp.location.toLowerCase().includes(searchTerm)); // Search location address string
+                         (opp.location && opp.location.toLowerCase().includes(searchTerm)) ||
+                         (opp.tag && opp.tag.toLowerCase().includes(searchTerm)); // Search tag name also
 
-    return matchesTag && matchesSearch;
+    return matchesSearch;
   });
 
   console.log(`Displaying ${filteredOpportunities.length} filtered opportunities.`);
@@ -140,24 +155,75 @@ function showInfoWindow(marker) {
   const formattedTime = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
 
   const content = `
-    <div style="max-width: 250px; padding: 5px; color: #333;">
-      <h3 style="margin: 0 0 5px 0; font-weight: bold; color: #000;">${opportunity.title}</h3>
+    <div style="max-width: 280px; padding: 8px; color: #333; font-family: Arial, sans-serif;">
+      <h3 style="margin: 0 0 8px 0; font-weight: bold; color: #000; font-size: 16px;">${opportunity.title}</h3>
       <p style="margin: 2px 0; font-size: 0.85em; color: #555;">
         <i class="fas fa-calendar-alt fa-fw" style="color: #888;"></i> ${formattedDate} at ${formattedTime}
       </p>
       <p style="margin: 2px 0; font-size: 0.85em; color: #555;">
         <i class="fas fa-map-marker-alt fa-fw" style="color: #888;"></i> ${opportunity.location || 'Location TBD'}
       </p>
+      <p style="margin: 2px 0; font-size: 0.85em; color: #555;">
+        <i class="fas fa-clock fa-fw" style="color: #888;"></i> ${opportunity.duration || 0} hours
+      </p>
       ${opportunity.description ? `<p style="margin: 8px 0; font-size: 0.9em; color: #333;">${opportunity.description.substring(0, 100)}${opportunity.description.length > 100 ? '...' : ''}</p>` : ''}
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
         <span style="font-size: 0.75em; background-color: #e0e0e0; color: #333; padding: 2px 6px; border-radius: 10px; text-transform: capitalize;">${opportunity.tag}</span>
-        <a href="/opportunities/${opportunity._id}" target="_blank" style="font-size: 0.85em; color: #0056b3; text-decoration: none; font-weight: 500;">View Details</a>
+        <div>
+          <a href="/opportunities/${opportunity._id}" style="display: inline-block; margin-left: 5px; padding: 4px 8px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px; font-size: 12px; font-weight: bold;">View Quest</a>
+          <a href="/opportunities/${opportunity._id}/signup" style="display: inline-block; margin-left: 5px; padding: 4px 8px; background-color: #2196F3; color: white; text-decoration: none; border-radius: 4px; font-size: 12px; font-weight: bold;">Join Quest</a>
+        </div>
       </div>
     </div>
   `;
 
   infoWindow.setContent(content);
   infoWindow.open(map, marker);
+  
+  // Also display details in the bottom details section
+  const detailsContainer = document.getElementById('opportunity-details');
+  if (detailsContainer) {
+    detailsContainer.innerHTML = `
+      <div class="flex flex-col md:flex-row items-start gap-4">
+        <div class="flex-1">
+          <div class="flex items-center mb-2">
+            <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-${getCategoryClass(opportunity.tag)}-900 border border-${getCategoryClass(opportunity.tag)}-700 mr-3">
+              <i class="${getCategoryIcon(opportunity.tag)} text-${getCategoryClass(opportunity.tag)}-400"></i>
+            </div>
+            <h3 class="text-xl font-bold text-blue-300">${opportunity.title}</h3>
+          </div>
+          <p class="text-gray-300 mb-3">${opportunity.description}</p>
+          <div class="grid grid-cols-2 gap-3 mb-3">
+            <div class="bg-gray-700 p-2 rounded">
+              <div class="text-xs text-blue-300 uppercase">Date & Time</div>
+              <div class="text-white">${formattedDate} at ${formattedTime}</div>
+            </div>
+            <div class="bg-gray-700 p-2 rounded">
+              <div class="text-xs text-blue-300 uppercase">Location</div>
+              <div class="text-white">${opportunity.location || 'Location TBD'}</div>
+            </div>
+            <div class="bg-gray-700 p-2 rounded">
+              <div class="text-xs text-blue-300 uppercase">Duration</div>
+              <div class="text-white">${opportunity.duration || 0} hours</div>
+            </div>
+            <div class="bg-gray-700 p-2 rounded">
+              <div class="text-xs text-blue-300 uppercase">Category</div>
+              <div class="text-white">${opportunity.tag}</div>
+            </div>
+          </div>
+        </div>
+        <div class="w-full md:w-auto flex flex-col gap-2">
+          <a href="/opportunities/${opportunity._id}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center whitespace-nowrap">
+            <i class="fas fa-info-circle mr-2"></i> View Quest Details
+          </a>
+          <a href="/opportunities/${opportunity._id}/signup" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center whitespace-nowrap">
+            <i class="fas fa-user-plus mr-2"></i> Join This Quest
+          </a>
+        </div>
+      </div>
+    `;
+    detailsContainer.classList.remove('hidden');
+  }
 }
 
 /**
@@ -173,14 +239,10 @@ function clearMarkers() {
  */
 function setupFilters() {
   const searchTermInput = document.getElementById('search-term');
-  const tagFilterSelect = document.getElementById('tag-filter');
 
   if (searchTermInput) {
     // Use 'input' event for real-time filtering as user types
     searchTermInput.addEventListener('input', displayOpportunities); 
-  }
-  if (tagFilterSelect) {
-    tagFilterSelect.addEventListener('change', displayOpportunities);
   }
 }
 
@@ -295,6 +357,40 @@ function getCategoryColor(tag) {
       other: '#6B7280'   // Gray
   };
   return colorMap[tag] || colorMap.other;
+}
+
+/**
+ * Gets the appropriate CSS class for a category tag.
+ * @param {string} tag - The category tag.
+ * @returns {string} The CSS class.
+ */
+function getCategoryClass(tag) {
+  const categoryColorMap = {
+    'healthcare': 'red',
+    'education': 'blue',
+    'environment': 'green',
+    'community': 'purple',
+    'animals': 'yellow',
+    'other': 'gray'
+  };
+  return categoryColorMap[tag] || 'gray';
+}
+
+/**
+ * Gets the appropriate icon for a category tag.
+ * @param {string} tag - The category tag.
+ * @returns {string} The icon class.
+ */
+function getCategoryIcon(tag) {
+  const categoryIconMap = {
+    'healthcare': 'fas fa-heartbeat',
+    'education': 'fas fa-graduation-cap',
+    'environment': 'fas fa-tree',
+    'community': 'fas fa-users',
+    'animals': 'fas fa-paw',
+    'other': 'fas fa-star'
+  };
+  return categoryIconMap[tag] || 'fas fa-star';
 }
 
 // Ensure initMap is called when the Google Maps script is loaded and ready.

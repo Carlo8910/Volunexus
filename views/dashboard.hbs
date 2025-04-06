@@ -37,17 +37,17 @@
       <!-- Stats Overview -->
       <div class="grid grid-cols-3 gap-3 mb-4">
         <div class="bg-gray-800 p-3 rounded-lg text-center shadow-lg border-2 border-indigo-700 transform hover:scale-105 transition-transform">
-          <div class="text-2xl font-bold text-green-400 mb-1 xp-glow">{{#if stats.totalHours}}{{stats.totalHours}}{{else}}0{{/if}}</div>
+          <div class="text-2xl font-bold text-green-400 mb-1 xp-glow">{{stats.totalHours}}</div>
           <div class="text-xs text-blue-300 uppercase">Hours</div>
           <div class="text-xs text-blue-300 uppercase">Volunteered</div>
         </div>
         <div class="bg-gray-800 p-3 rounded-lg text-center shadow-lg border-2 border-indigo-700 transform hover:scale-105 transition-transform">
-          <div class="text-2xl font-bold text-green-400 mb-1 xp-glow">{{#if stats.eventsAttended}}{{stats.eventsAttended}}{{else}}0{{/if}}</div>
+          <div class="text-2xl font-bold text-green-400 mb-1 xp-glow">{{stats.eventsAttended}}</div>
           <div class="text-xs text-blue-300 uppercase">Quests</div>
           <div class="text-xs text-blue-300 uppercase">Completed</div>
         </div>
         <div class="bg-gray-800 p-3 rounded-lg text-center shadow-lg border-2 border-indigo-700 transform hover:scale-105 transition-transform">
-          <div class="text-2xl font-bold text-green-400 mb-1 xp-glow">{{#if stats.categoriesCount}}{{stats.categoriesCount}}{{else}}0{{/if}}</div>
+          <div class="text-2xl font-bold text-green-400 mb-1 xp-glow">{{stats.categoriesCount}}</div>
           <div class="text-xs text-blue-300 uppercase">Realms</div>
           <div class="text-xs text-blue-300 uppercase">Helped</div>
         </div>
@@ -64,8 +64,8 @@
     <!-- Character Types Section -->
     <div class="md:w-3/5 bg-gray-950 p-5 rounded-lg shadow-lg border-2 border-indigo-700 pixel-border">
       <div class="flex justify-between items-center mb-3">
-        <div class="text-2xl font-bold text-green-400">Hero Classes</div>
-        <div class="text-xs text-blue-300 uppercase">Character Types</div>
+        <div class="text-2xl font-bold text-green-400">Volunteer Categories</div>
+        <div class="text-xs text-blue-300 uppercase">Browse by Type</div>
       </div>
       
       <!-- Scrollable container for hero classes -->
@@ -76,7 +76,7 @@
               <div class="w-12 h-12 bg-{{mapCategoryColor id}}-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-{{mapCategoryColor id}}-600">
                 <i class="{{mapCategoryIcon id}} text-{{mapCategoryColor id}}-400 text-xl"></i>
               </div>
-              <h3 class="font-semibold text-{{mapCategoryColor id}}-400">{{mapCategoryName id}}</h3>
+              <h3 class="font-semibold text-{{mapCategoryColor id}}-400 capitalize">{{id}}</h3>
               <div class="level-badge bg-{{mapCategoryColor id}}-900 text-{{mapCategoryColor id}}-300 mt-1">
                 <i class="{{mapCategoryLevelIcon id}} mr-1"></i> LVL {{mapCategoryLevel points}}
               </div>
@@ -87,78 +87,16 @@
           {{/each}}
           
           {{#unless categoryProgress.length}}
-            <!-- Example character cards if no real data -->
-            <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-green-900 cursor-pointer hover:border-green-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('environment')">
-              <div class="w-12 h-12 bg-green-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-green-600">
-                <i class="fas fa-tree text-green-400 text-xl"></i>
+            <!-- No categories yet message -->
+            <div class="w-full text-center py-6">
+              <div class="w-16 h-16 bg-gray-800 rounded-full mx-auto mb-3 flex items-center justify-center">
+                <i class="fas fa-scroll text-blue-400 text-xl"></i>
               </div>
-              <h3 class="font-semibold text-green-400">Nature Guardian</h3>
-              <div class="level-badge bg-green-900 text-green-300 mt-1">
-                <i class="fas fa-shield-alt mr-1"></i> LVL 4
-              </div>
-              <div class="progress-bar mt-2">
-                <div class="progress-bar-fill bg-green-500" style="width: 65%"></div>
-              </div>
-            </div>
-            <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-blue-900 cursor-pointer hover:border-blue-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('education')">
-              <div class="w-12 h-12 bg-blue-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-blue-600">
-                <i class="fas fa-graduation-cap text-blue-400 text-xl"></i>
-              </div>
-              <h3 class="font-semibold text-blue-400">Knowledge Sage</h3>
-              <div class="level-badge bg-blue-900 text-blue-300 mt-1">
-                <i class="fas fa-book mr-1"></i> LVL 3
-              </div>
-              <div class="progress-bar mt-2">
-                <div class="progress-bar-fill bg-blue-500" style="width: 45%"></div>
-              </div>
-            </div>
-            <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-purple-900 cursor-pointer hover:border-purple-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('community')">
-              <div class="w-12 h-12 bg-purple-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-purple-600">
-                <i class="fas fa-users text-purple-400 text-xl"></i>
-              </div>
-              <h3 class="font-semibold text-purple-400">Unity Weaver</h3>
-              <div class="level-badge bg-purple-900 text-purple-300 mt-1">
-                <i class="fas fa-hands-helping mr-1"></i> LVL 5
-              </div>
-              <div class="progress-bar mt-2">
-                <div class="progress-bar-fill bg-purple-500" style="width: 80%"></div>
-              </div>
-            </div>
-            <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-yellow-900 cursor-pointer hover:border-yellow-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('animals')">
-              <div class="w-12 h-12 bg-yellow-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-yellow-600">
-                <i class="fas fa-hand-holding-heart text-yellow-400 text-xl"></i>
-              </div>
-              <h3 class="font-semibold text-yellow-400">Hope Bringer</h3>
-              <div class="level-badge bg-yellow-900 text-yellow-300 mt-1">
-                <i class="fas fa-heart mr-1"></i> LVL 2
-              </div>
-              <div class="progress-bar mt-2">
-                <div class="progress-bar-fill bg-yellow-500" style="width: 30%"></div>
-              </div>
-            </div>
-            <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-red-900 cursor-pointer hover:border-red-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('healthcare')">
-              <div class="w-12 h-12 bg-red-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-red-600">
-                <i class="fas fa-heartbeat text-red-400 text-xl"></i>
-              </div>
-              <h3 class="font-semibold text-red-400">Healing Mage</h3>
-              <div class="level-badge bg-red-900 text-red-300 mt-1">
-                <i class="fas fa-first-aid mr-1"></i> LVL 1
-              </div>
-              <div class="progress-bar mt-2">
-                <div class="progress-bar-fill bg-red-500" style="width: 15%"></div>
-              </div>
-            </div>
-            <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-gray-700 cursor-pointer hover:border-gray-500 transition-all" style="min-width: 150px;" onclick="showQuestDetails('other')">
-              <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-gray-600">
-                <i class="fas fa-star text-gray-400 text-xl"></i>
-              </div>
-              <h3 class="font-semibold text-gray-400">Misc Hero</h3>
-              <div class="level-badge bg-gray-900 text-gray-300 mt-1">
-                <i class="fas fa-star mr-1"></i> LVL 1
-              </div>
-              <div class="progress-bar mt-2">
-                <div class="progress-bar-fill bg-gray-500" style="width: 10%"></div>
-              </div>
+              <h3 class="text-blue-300 font-semibold mb-2">You haven't volunteered in any categories yet</h3>
+              <p class="text-gray-400 text-sm mb-4">Join opportunities to unlock categories and level up your skills!</p>
+              <a href="/opportunities" class="bg-blue-600 hover:bg-blue-700 text-white text-sm px-4 py-2 rounded-lg inline-flex items-center">
+                <i class="fas fa-search mr-2"></i> Find Opportunities
+              </a>
             </div>
           {{/unless}}
         </div>
@@ -184,6 +122,11 @@
               <div class="p-2 bg-gray-800 rounded mb-1">No quests completed yet</div>
             </div>
           </div>
+          <div class="mt-4 flex justify-end">
+            <a href="/opportunities?tag=" id="find-more-quests" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded-lg flex items-center">
+              <i class="fas fa-search mr-2"></i> Find More Quests
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -194,14 +137,18 @@
 <div class="game-card p-6 mb-8">
   <h2 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-400 mb-6 flex items-center">
     <i class="fas fa-scroll text-yellow-400 mr-2"></i>
-    {{#if (eq role "organization")}}YOUR QUEST OFFERINGS{{else}}AVAILABLE QUESTS{{/if}}
+    {{#if (eq role "organization")}}
+      YOUR QUEST OFFERINGS
+    {{else}}
+      YOUR ACTIVE QUESTS
+    {{/if}}
   </h2>
   
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     {{#if opportunities.length}}
     {{#each opportunities}}
     <div class="bg-gray-800 rounded-lg overflow-hidden border-2 border-indigo-700 shadow-md transform hover:scale-102 transition-transform">
-      <div class="h-28 bg-cover bg-center" style="background-image: url('/img/categories/{{tag}}.jpg');"></div>
+      <div class="h-28 bg-cover bg-center" style="background-image: url('/images/categories/{{tag}}.jpg');"></div>
       <div class="p-4">
         <div class="flex items-center mb-2">
           <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-{{mapCategoryColor tag}}-900 border border-{{mapCategoryColor tag}}-700 mr-2">
@@ -303,71 +250,109 @@
 </div>
 
 <script>
-  // Quest details data - in a real app, this would come from the server
-  const questData = {
-    'environment': {
-      title: 'Nature Guardian',
-      hours: 24,
-      events: 5,
-      quests: [
-        { name: 'Park Cleanup', date: '2025-03-15', hours: 4 },
-        { name: 'Tree Planting', date: '2025-03-01', hours: 6 },
-        { name: 'Beach Cleanup', date: '2025-02-20', hours: 5 },
-        { name: 'Wildlife Sanctuary', date: '2025-02-05', hours: 9 }
-      ]
-    },
-    'education': {
-      title: 'Knowledge Sage',
-      hours: 18,
-      events: 4,
-      quests: [
-        { name: 'Tutoring Session', date: '2025-03-10', hours: 6 },
-        { name: 'Library Helper', date: '2025-02-25', hours: 4 },
-        { name: 'Coding Workshop', date: '2025-02-15', hours: 8 }
-      ]
-    },
-    'community': {
-      title: 'Unity Weaver',
-      hours: 32,
-      events: 7,
-      quests: [
-        { name: 'Food Bank', date: '2025-03-20', hours: 5 },
-        { name: 'Community Garden', date: '2025-03-05', hours: 6 },
-        { name: 'Elderly Care', date: '2025-02-28', hours: 8 },
-        { name: 'Neighborhood Cleanup', date: '2025-02-10', hours: 7 },
-        { name: 'Community Center', date: '2025-01-30', hours: 6 }
-      ]
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize tooltip if needed
+    if (typeof tippy === 'function') {
+      tippy('[data-tippy-content]');
     }
-  };
-
-  function showQuestDetails(category) {
-    const data = questData[category] || { title: 'Unknown Category', hours: 0, events: 0, quests: [] };
-    const detailsSection = document.getElementById('quest-details');
-    const titleElement = document.getElementById('quest-title');
-    const hoursElement = document.getElementById('quest-hours');
-    const eventsElement = document.getElementById('quest-events');
-    const questListElement = document.getElementById('quest-list');
     
-    // Update the details
-    titleElement.textContent = data.title;
-    hoursElement.textContent = data.hours;
-    eventsElement.textContent = data.events;
-    
-    // Update the quest list
-    if (data.quests && data.quests.length > 0) {
-      let questsHTML = '';
-      data.quests.forEach(quest => {
-        questsHTML += `<div class="p-2 bg-gray-800 rounded mb-1 flex justify-between">
-          <span>${quest.name}</span>
-          <span class="text-green-400">${quest.hours}h</span>
-        </div>`;
+    // Handle category card clicks to show quest details
+    window.showQuestDetails = function(categoryId) {
+      const questDetails = document.getElementById('quest-details');
+      const questTitle = document.getElementById('quest-title');
+      const questHours = document.getElementById('quest-hours');
+      const questEvents = document.getElementById('quest-events');
+      const questList = document.getElementById('quest-list');
+      const findMoreQuests = document.getElementById('find-more-quests');
+      
+      if (!questDetails || !categoryId) return;
+      
+      // Get category-specific details from data
+      const categoryData = {
+        {{#each categoryProgress}}
+        "{{id}}": {
+          name: "{{id}}",
+          hours: {{points}} / 10, // Convert points back to hours
+          events: 0, // Will be calculated below
+          color: "{{mapCategoryColor id}}",
+          icon: "{{mapCategoryIcon id}}"
+        },
+        {{/each}}
+      };
+      
+      // Calculate events per category
+      const attendedOpportunities = [
+        {{#each attendedOpportunities}}
+        {
+          id: "{{_id}}",
+          title: "{{title}}",
+          date: "{{formatDate dateTime 'MMM D, YYYY'}}",
+          tag: "{{tag}}",
+          duration: {{duration}}
+        },
+        {{/each}}
+      ];
+      
+      // Count events by category
+      attendedOpportunities.forEach(opp => {
+        if (opp.tag && categoryData[opp.tag]) {
+          categoryData[opp.tag].events++;
+        }
       });
-      questListElement.innerHTML = questsHTML;
-    } else {
-      questListElement.innerHTML = '<div class="p-2 bg-gray-800 rounded mb-1">No quests completed yet</div>';
+      
+      const selectedCategory = categoryData[categoryId] || {
+        name: categoryId.charAt(0).toUpperCase() + categoryId.slice(1),
+        hours: 0,
+        events: 0,
+        color: "gray",
+        icon: "fas fa-question-circle"
+      };
+      
+      // Update the quest details section
+      questTitle.textContent = selectedCategory.name + " Quests";
+      questTitle.className = `font-bold text-lg text-${selectedCategory.color}-400 mb-2`;
+      
+      questHours.textContent = selectedCategory.hours;
+      questEvents.textContent = selectedCategory.events;
+      
+      // Update the find more quests link
+      if (findMoreQuests) {
+        findMoreQuests.href = `/opportunities?tag=${categoryId}`;
+      }
+      
+      // Get recent opportunities for this category
+      const categoryOpportunities = attendedOpportunities
+        .filter(opp => opp.tag === categoryId)
+        .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date, newest first
+      
+      // Update the quest list
+      if (categoryOpportunities.length > 0) {
+        questList.innerHTML = categoryOpportunities
+          .slice(0, 3) // Show at most 3 recent quests
+          .map(opp => `
+            <a href="/opportunities/${opp.id}" class="block p-2 bg-gray-800 rounded mb-1 hover:bg-gray-700 transition-colors">
+              <div class="flex justify-between items-center">
+                <span class="text-green-400">${opp.title}</span>
+                <span class="text-xs text-gray-400">${opp.date}</span>
+              </div>
+            </a>
+          `)
+          .join('');
+      } else {
+        questList.innerHTML = `<div class="p-2 bg-gray-800 rounded mb-1">No ${selectedCategory.name} quests completed yet</div>`;
+      }
+      
+      // Show the quest details section
+      questDetails.classList.remove('hidden');
     }
     
-    // Show the details section
-    detailsSection.classList.remove('hidden');
-  }
+    // Auto-click on the first category if available
+    const firstCategory = document.querySelector('.character-card');
+    if (firstCategory) {
+      const categoryId = firstCategory.getAttribute('onclick')?.match(/showQuestDetails\('([^']+)'\)/)?.[1];
+      if (categoryId) {
+        showQuestDetails(categoryId);
+      }
+    }
+  });
 </script> 

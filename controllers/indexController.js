@@ -21,7 +21,7 @@ exports.showMapPage = async (req, res, next) => {
     // Always fetch opportunities from the database, regardless of test mode
     console.log('Fetching opportunities from database for map view...');
     let opportunities = await Opportunity.find({})
-      .select('title location.address location.coordinates dateTime tag') // Select fields needed
+      .select('title description location.address location.coordinates dateTime tag duration') // Select fields needed, including duration
       .sort({ dateTime: 'asc' })
       .lean();
 
@@ -41,7 +41,8 @@ exports.showMapPage = async (req, res, next) => {
            location: opp.location ? opp.location.address : 'No address',
            coordinates: coords,
            dateTime: opp.dateTime,
-           tag: opp.tag
+           tag: opp.tag,
+           duration: opp.duration || 0 // Include duration field, default to 0 if missing
        };
     });
 

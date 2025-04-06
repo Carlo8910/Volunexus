@@ -131,16 +131,16 @@ const hbs = exphbs.create({
       return categoryIconMap[category] || 'fas fa-circle';
     },
     mapCategoryName: function(category) {
-      // Maps category IDs to display names with gaming theme
+      // Maps category IDs to their display names (capitalized)
       const categoryNameMap = {
-        'healthcare': 'Healer',
-        'education': 'Knowledge Sage',
-        'environment': 'Nature Guardian',
-        'community': 'Unity Weaver',
-        'animals': 'Beast Whisperer',
-        'other': 'Mystery Seeker'
+        'healthcare': 'Healthcare',
+        'education': 'Education',
+        'environment': 'Environment',
+        'community': 'Community',
+        'animals': 'Animals',
+        'other': 'Other'
       };
-      return categoryNameMap[category] || 'Mystery Seeker';
+      return categoryNameMap[category] || 'Other';
     },
     mapCategoryLevelIcon: function(category) {
       // Maps category IDs to level icon classes

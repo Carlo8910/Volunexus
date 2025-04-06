@@ -147,4 +147,23 @@ function showOpportunityMap(lat, lng) {
       strokeWeight: 2
     }
   });
+}
+
+// Make showOpportunityMap available globally for the opportunity detail page
+window.showOpportunityMap = showOpportunityMap;
+
+// Handle Google Maps API callback if we're on the opportunity edit/create page
+if (typeof window.initMapOnLoad !== 'function') {
+  window.initMapOnLoad = function() {
+    console.log('Google Maps API loaded (opportunity page)');
+    if (document.getElementById('location-map')) {
+      initLocationMap();
+    } else if (document.getElementById('map')) {
+      // We're on an opportunity detail page
+      const mapElement = document.getElementById('map');
+      const lat = parseFloat(mapElement.dataset.lat);
+      const lng = parseFloat(mapElement.dataset.lng);
+      showOpportunityMap(lat, lng);
+    }
+  };
 } 
