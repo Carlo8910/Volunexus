@@ -3,6 +3,7 @@ const router = express.Router();
 const { ensureAuth, ensureOrganization } = require('../middleware/auth');
 const Opportunity = require('../models/Opportunity');
 const User = require('../models/User');
+const opportunityController = require('../controllers/opportunityController');
 
 // @desc    Show add opportunity page
 // @route   GET /opportunities/add
@@ -300,5 +301,19 @@ router.get('/near', async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
+// @desc    Redirect base /opportunities to the map view
+// @route   GET /opportunities
+router.get('/', (req, res) => {
+  res.redirect('/map');
+});
+
+// @desc    Show single opportunity details page
+// @route   GET /opportunities/:id
+router.get('/:id', opportunityController.showOpportunity);
+
+// @desc    Allow authenticated user to attend an opportunity
+// @route   PUT /opportunities/:id/attend
+router.put('/:id/attend', ensureAuth, opportunityController.attendOpportunity);
 
 module.exports = router; 

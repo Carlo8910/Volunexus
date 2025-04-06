@@ -39,7 +39,7 @@ const mockConfigureAuth0 = () => {
 };
 
 // Toggle test mode
-const enableTestMode = true;
+const enableTestMode = false;
 
 module.exports = {
   testUser,

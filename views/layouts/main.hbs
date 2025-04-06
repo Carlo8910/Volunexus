@@ -15,7 +15,15 @@
   <link rel="stylesheet" href="/css/custom.css">
   <link rel="stylesheet" href="/css/achievements.css">
   {{#if mapApiKey}}
-  <script src="https://maps.googleapis.com/maps/api/js?key={{mapApiKey}}&libraries=places"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{mapApiKey}}&libraries=places&callback=initMap" async defer></script>
+  {{else}}
+    <script>
+      function initMap() { 
+        console.warn('Google Maps API Key missing. Map cannot be initialized.'); 
+        const mapDiv = document.getElementById('map');
+        if(mapDiv) mapDiv.innerHTML = '<p style="text-align:center; color:red; padding: 20px;">Map requires API key.</p>';
+      } 
+    </script>
   {{/if}}
   <!-- GSAP Animation library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
