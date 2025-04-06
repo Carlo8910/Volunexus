@@ -26,6 +26,7 @@ router.get('/', ensureAuth, async (req, res) => {
         'environment': '#34D399',  // green
         'community': '#FBBF24',    // yellow
         'animals': '#A78BFA',      // purple
+        'government': '#F97316',   // orange
         'other': '#9CA3AF'         // gray
       };
       
