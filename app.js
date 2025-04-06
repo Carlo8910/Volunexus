@@ -21,8 +21,12 @@ const { enableTestMode, mockAuth, mockConfigureAuth0 } = require('./config/test-
 // Load environment variables
 dotenv.config({ path: './config/.env' });
 
-// Connect to database
-connectDB();
+// Connect to database (optional for display-only mode)
+try {
+  connectDB();
+} catch (err) {
+  console.log('Database connection skipped. Running in display-only mode.');
+}
 
 // Initialize Express app
 const app = express();
@@ -42,9 +46,10 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'keyboard cat',
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGODB_URI
-  }),
+  // Using in-memory session store instead of MongoDB
+  // store: MongoStore.create({
+  //   mongoUrl: process.env.MONGODB_URI
+  // }),
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 // 1 day
   }

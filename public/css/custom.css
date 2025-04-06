@@ -1,4 +1,4 @@
-/* VolunExus - Gaming Themed Volunteer Platform */
+/* VoluNexus - Gaming Themed Volunteer Platform */
 
 /* Base theme elements */
 body {
@@ -100,6 +100,21 @@ h1, h2, h3, h4, h5, h6 {
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+
+/* Custom navy colors for Tailwind classes */
+.bg-navy-600 { background-color: #1a365d; }
+.bg-navy-700 { background-color: #153e75; }
+.bg-navy-800 { background-color: #1e429f; }
+.bg-navy-900 { background-color: #1a365d; }
+.border-navy-600 { border-color: #1a365d; }
+.border-navy-700 { border-color: #153e75; }
+.from-navy-600 { --tw-gradient-from: #1a365d; }
+.from-navy-700 { --tw-gradient-from: #153e75; }
+.from-navy-800 { --tw-gradient-from: #1e429f; }
+.to-navy-400 { --tw-gradient-to: #4299e1; }
+.hover\:from-navy-700:hover { --tw-gradient-from: #153e75; }
+.hover\:from-navy-800:hover { --tw-gradient-from: #1e429f; }
+.hover\:to-navy-900:hover { --tw-gradient-to: #1a365d; }
 
 .rank-badge {
   background-image: linear-gradient(to right, #10b981, #3b82f6);
