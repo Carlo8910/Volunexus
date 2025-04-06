@@ -1,28 +1,43 @@
 <div class="flex items-center justify-center min-h-screen">
-  <div class="text-center text-white p-8 max-w-3xl">
-    <h1 class="text-5xl font-bold mb-6">Make a Difference in Your Community</h1>
-    <p class="text-xl mb-8">Discover volunteer opportunities near you and track your impact with our interactive map.</p>
-    <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
-      <a href="/auth/login" class="bg-white text-green-700 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg shadow-lg">
-        Get Started
+  <div class="text-center p-8 max-w-4xl">
+    <div class="mb-10">
+      <h1 class="text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-400">Begin Your Volunteer Quest</h1>
+      <p class="text-xl mb-8 text-blue-300">Embark on epic quests, gain experience, and level up your hero while making a real difference in your realm.</p>
+    </div>
+    
+    <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 mb-12">
+      <a href="/auth/login" class="bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 text-white font-bold py-4 px-8 rounded-lg shadow-lg transition-all flex items-center justify-center">
+        <i class="fas fa-play-circle mr-2"></i> Start Your Journey
       </a>
-      <a href="/map" class="bg-transparent border-2 border-white text-white hover:bg-white hover:bg-opacity-20 font-bold py-3 px-6 rounded-lg">
-        Explore Map
+      <a href="/map" class="bg-gradient-to-r from-indigo-600 to-purple-500 hover:from-indigo-700 hover:to-purple-600 text-white font-bold py-4 px-8 rounded-lg shadow-lg transition-all flex items-center justify-center">
+        <i class="fas fa-map-marked-alt mr-2"></i> Discover Quests
       </a>
     </div>
-    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="p-6 bg-white bg-opacity-20 rounded-lg">
-        <h3 class="text-2xl font-bold mb-2">Find Opportunities</h3>
-        <p>Discover volunteer events in your area using our interactive map.</p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="game-card p-6 border-2 border-indigo-700 rounded-lg transform hover:scale-105 transition-transform">
+        <div class="w-16 h-16 bg-blue-900 rounded-lg flex items-center justify-center mx-auto mb-4 border-2 border-blue-600">
+          <i class="fas fa-map-marked-alt text-blue-400 text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-green-400">Quest Discovery</h3>
+        <p class="text-blue-300">Find volunteer quests in your realm using our interactive map system.</p>
       </div>
-      <div class="p-6 bg-white bg-opacity-20 rounded-lg">
-        <h3 class="text-2xl font-bold mb-2">Make an Impact</h3>
-        <p>Attend events and make a real difference in your community.</p>
+      
+      <div class="game-card p-6 border-2 border-indigo-700 rounded-lg transform hover:scale-105 transition-transform">
+        <div class="w-16 h-16 bg-purple-900 rounded-lg flex items-center justify-center mx-auto mb-4 border-2 border-purple-600">
+          <i class="fas fa-hands-helping text-purple-400 text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-green-400">Hero Impact</h3>
+        <p class="text-blue-300">Complete quests and make a real difference in your community realm.</p>
       </div>
-      <div class="p-6 bg-white bg-opacity-20 rounded-lg">
-        <h3 class="text-2xl font-bold mb-2">Track Progress</h3>
-        <p>Earn points and see your impact on the leaderboard.</p>
+      
+      <div class="game-card p-6 border-2 border-indigo-700 rounded-lg transform hover:scale-105 transition-transform">
+        <div class="w-16 h-16 bg-green-900 rounded-lg flex items-center justify-center mx-auto mb-4 border-2 border-green-600">
+          <i class="fas fa-chart-line text-green-400 text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-bold mb-2 text-green-400">Level Up</h3>
+        <p class="text-blue-300">Earn XP, unlock achievements, and rise through the hero ranks.</p>
       </div>
     </div>
   </div>
-</div> 
+</div>
