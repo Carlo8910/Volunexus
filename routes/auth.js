@@ -20,17 +20,31 @@ router.get('/login', function(req, res, next) {
 
 // @desc    Auth callback
 // @route   GET /auth/callback
-router.get('/callback', function(req, res, next) {
-  // If in test mode, bypass Auth0 callback and redirect to dashboard
-  if (enableTestMode) {
-    console.log('Test mode: Auth0 callback bypassed');
-    return res.redirect('/dashboard');
+router.get(
+  '/callback', // The path
+  (req, res, next) => {
+    // Middleware to bypass Passport if in test mode
+    if (enableTestMode) {
+      console.log('Test mode: Auth0 callback bypassed, redirecting');
+      // In test mode, req.user should already be set by mockAuth middleware
+      return res.redirect('/dashboard'); // Skip passport authentication
+    }
+    // Proceed to passport middleware if not in test mode
+    next();
+  },
+  passport.authenticate('auth0', {
+    // Optional: Add flash messages for failure feedback
+    // failureFlash: 'Authentication failed. Please try again.',
+    failureRedirect: '/' // Redirect to landing page on authentication failure
+  }),
+  // This function only runs if passport.authenticate succeeds
+  (req, res, next) => {
+    // Successful authentication, req.user is now available.
+    console.log('Auth0 callback successful, redirecting to /dashboard');
+    // You could add logic here, e.g., check if user profile is complete
+    res.redirect('/dashboard'); // Redirect to the main application dashboard
   }
-  // Otherwise use Auth0 authentication
-  passport.authenticate('auth0', { failureRedirect: '/' })(req, res, next);
-}, (req, res) => {
-  res.redirect('/dashboard');
-});
+);
 
 // @desc    Logout user
 // @route   GET /auth/logout

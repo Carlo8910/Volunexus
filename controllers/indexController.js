@@ -15,8 +15,8 @@ exports.showLandingPage = (req, res) => {
 // @desc    Show map page with opportunities
 // @route   GET /map
 exports.showMapPage = async (req, res, next) => {
-  // DEBUG: Check if function is entered
-  console.log('DEBUG (Server): Entered showMapPage function for /map'); 
+  // REMOVED DEBUG log
+  // console.log('DEBUG (Server): Entered showMapPage function for /map'); 
   try {
     // Always fetch opportunities from the database, regardless of test mode
     console.log('Fetching opportunities from database for map view...');
@@ -50,8 +50,8 @@ exports.showMapPage = async (req, res, next) => {
     // Explicitly stringify the processed array
     const opportunitiesJsonString = JSON.stringify(opportunities);
 
-    // DEBUG: Log the string being sent to the template
-    console.log('DEBUG (Server): opportunitiesJsonString being sent to template:', opportunitiesJsonString);
+    // REMOVED DEBUG log
+    // console.log('DEBUG (Server): opportunitiesJsonString being sent to template:', opportunitiesJsonString);
 
     res.render('map', {
       opportunities: opportunitiesJsonString, // Pass the stringified JSON

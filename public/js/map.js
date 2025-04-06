@@ -7,9 +7,9 @@ let currentLocationMarker;
 
 /**
  * Initializes the Google Map, adds markers, and sets up filters.
- * Expects `opportunitiesJson` to be passed from the template.
+ * Assign to window scope for Google Maps callback.
  */
-function initMap() {
+window.initMap = function() {
   if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
     console.error('Google Maps API is not loaded.');
     document.getElementById('map').innerHTML = '<p class="text-red-500 text-center">Map could not be loaded. Ensure Google Maps API is included.</p>';
@@ -31,13 +31,9 @@ function initMap() {
   if (opportunitiesContainer && opportunitiesContainer.textContent) {
     try {
       allOpportunityData = JSON.parse(opportunitiesContainer.textContent);
-      // DEBUG: Log parsed data
-      console.log('DEBUG: Parsed opportunity data:', allOpportunityData); 
       console.log(`Loaded ${allOpportunityData.length} opportunities for map.`);
     } catch (e) {
-      // DEBUG: Log parsing error
-      console.error('DEBUG: Error parsing opportunity data from template:', e); 
-      console.error('DEBUG: Content of map-data div:', opportunitiesContainer.textContent); 
+      console.error('Error parsing opportunity data from template:', e);
       allOpportunityData = [];
     }
   } else {
@@ -51,7 +47,7 @@ function initMap() {
   
   // --- Initial Display --- 
   displayOpportunities(); // Display initially loaded opportunities
-}
+}; // End of window.initMap assignment
 
 /**
  * Clears existing markers and adds new ones based on current filters.
@@ -77,8 +73,6 @@ function displayOpportunities() {
     return matchesTag && matchesSearch;
   });
 
-  // DEBUG: Log the filtered array
-  console.log('DEBUG: Filtered opportunities array:', filteredOpportunities);
   console.log(`Displaying ${filteredOpportunities.length} filtered opportunities.`);
 
   // Add markers for filtered opportunities
@@ -90,9 +84,9 @@ function displayOpportunities() {
  * @param {object} opportunity - The opportunity data object.
  */
 function addMarkerForOpportunity(opportunity) {
-  // DEBUG: Check if function is called and coordinates exist
+  // Standard check
   if (!opportunity.coordinates) {
-    console.warn('DEBUG: Skipping marker for opportunity with missing coordinates:', opportunity.title);
+    console.warn('Skipping marker for opportunity with missing coordinates:', opportunity.title);
     return; 
   }
   
@@ -101,13 +95,10 @@ function addMarkerForOpportunity(opportunity) {
     lng: opportunity.coordinates.lng
   };
 
-  // DEBUG: Log the position object
-  console.log(`DEBUG: Creating marker for "${opportunity.title}" at position:`, position);
-  
-  // Check if position values are valid numbers
+  // Standard check
   if (typeof position.lat !== 'number' || typeof position.lng !== 'number' || isNaN(position.lat) || isNaN(position.lng)) {
-     console.error('DEBUG: Invalid lat/lng values for marker:', position, 'Opportunity:', opportunity.title);
-     return; // Don't create marker with invalid coordinates
+     console.error('Invalid lat/lng values for marker:', position, 'Opportunity:', opportunity.title);
+     return; 
   }
 
   // Use category color for marker if available

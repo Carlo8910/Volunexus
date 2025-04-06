@@ -21,6 +21,9 @@ const { enableTestMode, mockAuth, mockConfigureAuth0 } = require('./config/test-
 // Load environment variables
 dotenv.config({ path: './config/.env' });
 
+// DEBUG: Check loaded Auth0 domain
+console.log(`DEBUG: Loaded AUTH0_DOMAIN = [${process.env.AUTH0_DOMAIN}]`); 
+
 // Connect to database
 connectDB();
 
@@ -62,7 +65,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-// Helper functions for Handlebars
+// Helper functions for Handlebars (Defined inline below)
 const hbs = exphbs.create({
   helpers: {
     eq: function (a, b) {
@@ -226,7 +229,10 @@ const hbs = exphbs.create({
         progress: progress,
         pointsToNext: nextRank.threshold - points
       };
-    }
+    },
+    addOne: function (index) {
+      return index + 1;
+    },
   },
   defaultLayout: 'main',
   extname: '.hbs'
