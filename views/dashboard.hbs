@@ -62,7 +62,6 @@
     </div>
     
     <!-- Character Types Section -->
-<<<<<<< HEAD
     <div class="md:w-3/5 bg-gray-950 p-5 rounded-lg shadow-lg border-2 border-indigo-700 pixel-border">
       <div class="flex justify-between items-center mb-3">
         <div class="text-2xl font-bold text-green-400">Hero Classes</div>
@@ -72,117 +71,96 @@
       <!-- Scrollable container for hero classes -->
       <div class="overflow-x-auto pb-2 hide-scrollbar">
         <div class="flex space-x-3" style="min-width: max-content; width: 100%;">
-        {{#each categoryProgress}}
-        <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-{{mapCategoryColor id}}-900 cursor-pointer hover:border-{{mapCategoryColor id}}-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('{{id}}')">
-          <div class="w-12 h-12 bg-{{mapCategoryColor id}}-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-{{mapCategoryColor id}}-600">
-            <i class="{{mapCategoryIcon id}} text-{{mapCategoryColor id}}-400 text-xl"></i>
-          </div>
-          <h3 class="font-semibold text-{{mapCategoryColor id}}-400">{{mapCategoryName id}}</h3>
-          <div class="level-badge bg-{{mapCategoryColor id}}-900 text-{{mapCategoryColor id}}-300 mt-1">
-            <i class="{{mapCategoryLevelIcon id}} mr-1"></i> LVL {{mapCategoryLevel points}}
-          </div>
-          <div class="progress-bar mt-2">
-            <div class="progress-bar-fill bg-{{mapCategoryColor id}}-500" style="width: {{percentage}}%"></div>
-=======
-    <div class="md:w-2/5 bg-gray-800 p-5 rounded-lg shadow-lg border-2 border-indigo-700 pixel-border">
-      <h2 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-400 mb-3 flex items-center">
-        <i class="fas fa-map-marked-alt text-green-400 mr-2"></i> Top Realms Helped
-      </h2>
-      <div class="space-y-3">
-        {{#each categoryProgress}}
-        <div class="bg-{{mapCategoryColor id}}-900 bg-opacity-40 rounded-lg p-3 flex items-center justify-between border border-{{mapCategoryColor id}}-700">
-          <div class="flex items-center">
-            <div class="w-8 h-8 bg-{{mapCategoryColor id}}-800 rounded-lg flex items-center justify-center mr-3 border border-{{mapCategoryColor id}}-600">
-              <i class="{{mapCategoryIcon id}} text-{{mapCategoryColor id}}-300 text-lg"></i>
+          {{#each categoryProgress}}
+            <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-{{mapCategoryColor id}}-900 cursor-pointer hover:border-{{mapCategoryColor id}}-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('{{id}}')">
+              <div class="w-12 h-12 bg-{{mapCategoryColor id}}-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-{{mapCategoryColor id}}-600">
+                <i class="{{mapCategoryIcon id}} text-{{mapCategoryColor id}}-400 text-xl"></i>
+              </div>
+              <h3 class="font-semibold text-{{mapCategoryColor id}}-400">{{mapCategoryName id}}</h3>
+              <div class="level-badge bg-{{mapCategoryColor id}}-900 text-{{mapCategoryColor id}}-300 mt-1">
+                <i class="{{mapCategoryLevelIcon id}} mr-1"></i> LVL {{mapCategoryLevel points}}
+              </div>
+              <div class="progress-bar mt-2">
+                <div class="progress-bar-fill bg-{{mapCategoryColor id}}-500" style="width: {{percentage}}%"></div>
+              </div>
             </div>
-            <h3 class="font-semibold text-{{mapCategoryColor id}}-300">{{mapCategoryName id}}</h3>
-          </div>
-          <div class="text-right">
-            <div class="font-bold text-{{mapCategoryColor id}}-200">{{points}} XP</div>
-            <div class="text-xs text-{{mapCategoryColor id}}-400">LVL {{mapCategoryLevel points}}</div>
->>>>>>> master
-          </div>
-        </div>
-        {{else}}
-          <p class="text-gray-400 text-center p-4">Complete quests in different realms to rank them up!</p>
-        {{/each}}
-<<<<<<< HEAD
-        
-        {{#unless categoryProgress.length}}
-        <!-- Example character cards if no real data -->
-        <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-green-900 cursor-pointer hover:border-green-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('environment')">
-          <div class="w-12 h-12 bg-green-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-green-600">
-            <i class="fas fa-tree text-green-400 text-xl"></i>
-          </div>
-          <h3 class="font-semibold text-green-400">Nature Guardian</h3>
-          <div class="level-badge bg-green-900 text-green-300 mt-1">
-            <i class="fas fa-shield-alt mr-1"></i> LVL 4
-          </div>
-          <div class="progress-bar mt-2">
-            <div class="progress-bar-fill bg-green-500" style="width: 65%"></div>
-          </div>
-        </div>
-        <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-blue-900 cursor-pointer hover:border-blue-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('education')">
-          <div class="w-12 h-12 bg-blue-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-blue-600">
-            <i class="fas fa-graduation-cap text-blue-400 text-xl"></i>
-          </div>
-          <h3 class="font-semibold text-blue-400">Knowledge Sage</h3>
-          <div class="level-badge bg-blue-900 text-blue-300 mt-1">
-            <i class="fas fa-book mr-1"></i> LVL 3
-          </div>
-          <div class="progress-bar mt-2">
-            <div class="progress-bar-fill bg-blue-500" style="width: 45%"></div>
-          </div>
-        </div>
-        <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-purple-900 cursor-pointer hover:border-purple-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('community')">
-          <div class="w-12 h-12 bg-purple-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-purple-600">
-            <i class="fas fa-users text-purple-400 text-xl"></i>
-          </div>
-          <h3 class="font-semibold text-purple-400">Unity Weaver</h3>
-          <div class="level-badge bg-purple-900 text-purple-300 mt-1">
-            <i class="fas fa-hands-helping mr-1"></i> LVL 5
-          </div>
-          <div class="progress-bar mt-2">
-            <div class="progress-bar-fill bg-purple-500" style="width: 80%"></div>
-          </div>
-        </div>
-        <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-yellow-900 cursor-pointer hover:border-yellow-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('animals')">
-          <div class="w-12 h-12 bg-yellow-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-yellow-600">
-            <i class="fas fa-hand-holding-heart text-yellow-400 text-xl"></i>
-          </div>
-          <h3 class="font-semibold text-yellow-400">Hope Bringer</h3>
-          <div class="level-badge bg-yellow-900 text-yellow-300 mt-1">
-            <i class="fas fa-heart mr-1"></i> LVL 2
-          </div>
-          <div class="progress-bar mt-2">
-            <div class="progress-bar-fill bg-yellow-500" style="width: 30%"></div>
-          </div>
-        </div>
-        <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-red-900 cursor-pointer hover:border-red-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('healthcare')">
-          <div class="w-12 h-12 bg-red-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-red-600">
-            <i class="fas fa-heartbeat text-red-400 text-xl"></i>
-          </div>
-          <h3 class="font-semibold text-red-400">Healing Mage</h3>
-          <div class="level-badge bg-red-900 text-red-300 mt-1">
-            <i class="fas fa-first-aid mr-1"></i> LVL 1
-          </div>
-          <div class="progress-bar mt-2">
-            <div class="progress-bar-fill bg-red-500" style="width: 15%"></div>
-          </div>
-        </div>
-        <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-gray-700 cursor-pointer hover:border-gray-500 transition-all" style="min-width: 150px;" onclick="showQuestDetails('other')">
-          <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-gray-600">
-            <i class="fas fa-star text-gray-400 text-xl"></i>
-          </div>
-          <h3 class="font-semibold text-gray-400">Misc Hero</h3>
-          <div class="level-badge bg-gray-900 text-gray-300 mt-1">
-            <i class="fas fa-star mr-1"></i> LVL 1
-          </div>
-          <div class="progress-bar mt-2">
-            <div class="progress-bar-fill bg-gray-500" style="width: 10%"></div>
-          </div>
-        </div>
-        {{/unless}}
+          {{/each}}
+          
+          {{#unless categoryProgress.length}}
+            <!-- Example character cards if no real data -->
+            <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-green-900 cursor-pointer hover:border-green-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('environment')">
+              <div class="w-12 h-12 bg-green-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-green-600">
+                <i class="fas fa-tree text-green-400 text-xl"></i>
+              </div>
+              <h3 class="font-semibold text-green-400">Nature Guardian</h3>
+              <div class="level-badge bg-green-900 text-green-300 mt-1">
+                <i class="fas fa-shield-alt mr-1"></i> LVL 4
+              </div>
+              <div class="progress-bar mt-2">
+                <div class="progress-bar-fill bg-green-500" style="width: 65%"></div>
+              </div>
+            </div>
+            <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-blue-900 cursor-pointer hover:border-blue-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('education')">
+              <div class="w-12 h-12 bg-blue-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-blue-600">
+                <i class="fas fa-graduation-cap text-blue-400 text-xl"></i>
+              </div>
+              <h3 class="font-semibold text-blue-400">Knowledge Sage</h3>
+              <div class="level-badge bg-blue-900 text-blue-300 mt-1">
+                <i class="fas fa-book mr-1"></i> LVL 3
+              </div>
+              <div class="progress-bar mt-2">
+                <div class="progress-bar-fill bg-blue-500" style="width: 45%"></div>
+              </div>
+            </div>
+            <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-purple-900 cursor-pointer hover:border-purple-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('community')">
+              <div class="w-12 h-12 bg-purple-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-purple-600">
+                <i class="fas fa-users text-purple-400 text-xl"></i>
+              </div>
+              <h3 class="font-semibold text-purple-400">Unity Weaver</h3>
+              <div class="level-badge bg-purple-900 text-purple-300 mt-1">
+                <i class="fas fa-hands-helping mr-1"></i> LVL 5
+              </div>
+              <div class="progress-bar mt-2">
+                <div class="progress-bar-fill bg-purple-500" style="width: 80%"></div>
+              </div>
+            </div>
+            <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-yellow-900 cursor-pointer hover:border-yellow-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('animals')">
+              <div class="w-12 h-12 bg-yellow-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-yellow-600">
+                <i class="fas fa-hand-holding-heart text-yellow-400 text-xl"></i>
+              </div>
+              <h3 class="font-semibold text-yellow-400">Hope Bringer</h3>
+              <div class="level-badge bg-yellow-900 text-yellow-300 mt-1">
+                <i class="fas fa-heart mr-1"></i> LVL 2
+              </div>
+              <div class="progress-bar mt-2">
+                <div class="progress-bar-fill bg-yellow-500" style="width: 30%"></div>
+              </div>
+            </div>
+            <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-red-900 cursor-pointer hover:border-red-600 transition-all" style="min-width: 150px;" onclick="showQuestDetails('healthcare')">
+              <div class="w-12 h-12 bg-red-900 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-red-600">
+                <i class="fas fa-heartbeat text-red-400 text-xl"></i>
+              </div>
+              <h3 class="font-semibold text-red-400">Healing Mage</h3>
+              <div class="level-badge bg-red-900 text-red-300 mt-1">
+                <i class="fas fa-first-aid mr-1"></i> LVL 1
+              </div>
+              <div class="progress-bar mt-2">
+                <div class="progress-bar-fill bg-red-500" style="width: 15%"></div>
+              </div>
+            </div>
+            <div class="character-card bg-gray-900 rounded-lg p-3 text-center border-2 border-gray-700 cursor-pointer hover:border-gray-500 transition-all" style="min-width: 150px;" onclick="showQuestDetails('other')">
+              <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mx-auto mb-2 border-2 border-gray-600">
+                <i class="fas fa-star text-gray-400 text-xl"></i>
+              </div>
+              <h3 class="font-semibold text-gray-400">Misc Hero</h3>
+              <div class="level-badge bg-gray-900 text-gray-300 mt-1">
+                <i class="fas fa-star mr-1"></i> LVL 1
+              </div>
+              <div class="progress-bar mt-2">
+                <div class="progress-bar-fill bg-gray-500" style="width: 10%"></div>
+              </div>
+            </div>
+          {{/unless}}
         </div>
       </div>
       
@@ -207,195 +185,37 @@
             </div>
           </div>
         </div>
-=======
->>>>>>> master
       </div>
     </div>
-    
-
-    
-    <script>
-      // Quest details data - in a real app, this would come from the server
-      const questData = {
-        'environment': {
-          title: 'Nature Guardian',
-          hours: 24,
-          events: 5,
-          quests: [
-            { name: 'Park Cleanup', date: '2025-03-15', hours: 4 },
-            { name: 'Tree Planting', date: '2025-03-01', hours: 6 },
-            { name: 'Beach Cleanup', date: '2025-02-20', hours: 5 },
-            { name: 'Wildlife Sanctuary', date: '2025-02-05', hours: 9 }
-          ]
-        },
-        'education': {
-          title: 'Knowledge Sage',
-          hours: 18,
-          events: 4,
-          quests: [
-            { name: 'Tutoring Session', date: '2025-03-10', hours: 6 },
-            { name: 'Library Helper', date: '2025-02-25', hours: 4 },
-            { name: 'Coding Workshop', date: '2025-02-15', hours: 8 }
-          ]
-        },
-        'community': {
-          title: 'Unity Weaver',
-          hours: 32,
-          events: 7,
-          quests: [
-            { name: 'Food Bank', date: '2025-03-20', hours: 5 },
-            { name: 'Community Garden', date: '2025-03-05', hours: 6 },
-            { name: 'Elderly Care', date: '2025-02-28', hours: 8 },
-            { name: 'Neighborhood Cleanup', date: '2025-02-10', hours: 7 },
-            { name: 'Community Center', date: '2025-01-30', hours: 6 }
-          ]
-        },
-        'animals': {
-          title: 'Hope Bringer',
-          hours: 12,
-          events: 3,
-          quests: [
-            { name: 'Animal Shelter', date: '2025-03-12', hours: 5 },
-            { name: 'Pet Adoption Event', date: '2025-02-22', hours: 7 }
-          ]
-        },
-        'healthcare': {
-          title: 'Healing Mage',
-          hours: 8,
-          events: 1,
-          quests: [
-            { name: 'Blood Drive', date: '2025-03-18', hours: 8 }
-          ]
-        },
-        'other': {
-          title: 'Misc Hero',
-          hours: 5,
-          events: 1,
-          quests: [
-            { name: 'Fundraising Event', date: '2025-03-08', hours: 5 }
-          ]
-        }
-      };
-      
-      // Function to show quest details when a hero class is clicked
-      function showQuestDetails(questType) {
-        const detailsSection = document.getElementById('quest-details');
-        const questTitle = document.getElementById('quest-title');
-        const questHours = document.getElementById('quest-hours');
-        const questEvents = document.getElementById('quest-events');
-        const questList = document.getElementById('quest-list');
-        
-        // Get the data for this quest type
-        const data = questData[questType] || { title: 'Unknown Quest', hours: 0, events: 0, quests: [] };
-        
-        // Update the details
-        questTitle.textContent = data.title + ' Details';
-        questHours.textContent = data.hours;
-        questEvents.textContent = data.events;
-        
-        // Generate the quest list HTML
-        if (data.quests.length > 0) {
-          let questsHTML = '';
-          data.quests.forEach(quest => {
-            questsHTML += `<div class="p-2 bg-gray-800 rounded mb-1 flex justify-between">
-              <div>${quest.name}</div>
-              <div class="text-green-400">${quest.hours} hrs</div>
-            </div>`;
-          });
-          questList.innerHTML = questsHTML;
-        } else {
-          questList.innerHTML = '<div class="p-2 bg-gray-800 rounded mb-1">No quests completed yet</div>';
-        }
-        
-        // Show the details section
-        detailsSection.classList.remove('hidden');
-        
-        // Add animation
-        detailsSection.classList.add('fade-in');
-        setTimeout(() => {
-          detailsSection.classList.remove('fade-in');
-        }, 500);
-      }
-      
-      // Initialize with the first quest type if available
-      document.addEventListener('DOMContentLoaded', function() {
-        // Get the first quest card
-        const firstQuestCard = document.querySelector('.character-card');
-        if (firstQuestCard) {
-          // Extract the quest type from the onclick attribute
-          const onclickAttr = firstQuestCard.getAttribute('onclick');
-          if (onclickAttr) {
-            const match = onclickAttr.match(/showQuestDetails\('([^']+)'\)/);
-            if (match && match[1]) {
-              // Show the details for this quest type
-              showQuestDetails(match[1]);
-            }
-          }
-        }
-      });
-    </script>
-    
-    <!-- Action Button (conditional) -->
-    {{#if (eq role "organization")}}
-    <div class="flex justify-end mt-4 md:mt-0">
-      <a href="#" class="game-btn bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all flex items-center uppercase">
-        <i class="fas fa-plus-circle mr-2"></i>
-        Create Quest
-      </a>
-    </div>
-    {{/if}}
   </div>
 </div>
 
+<!-- Available Quests Section -->
 <div class="game-card p-6 mb-8">
-  <div class="flex justify-between items-center mb-6">
-    <h2 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-400 flex items-center">
-      <i class="fas fa-scroll text-green-400 mr-2"></i>
-      {{#if (eq role "organization")}}
-        YOUR CREATED QUESTS
-      {{else}}
-        AVAILABLE QUESTS
-      {{/if}}
-    </h2>
-    
-    <div class="flex space-x-2">
-      <button class="bg-green-800 hover:bg-green-700 text-green-300 px-4 py-2 rounded-lg text-sm font-medium transition-colors border-2 border-green-600 shadow-lg">
-        <i class="fas fa-hourglass-start mr-1"></i> UPCOMING
-      </button>
-      <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 px-4 py-2 rounded-lg text-sm font-medium transition-colors border-2 border-gray-600 shadow-lg">
-        <i class="fas fa-history mr-1"></i> COMPLETED
-      </button>
-      <button class="bg-gray-800 hover:bg-gray-700 text-gray-300 px-4 py-2 rounded-lg text-sm font-medium transition-colors border-2 border-gray-600 shadow-lg">
-        <i class="fas fa-globe mr-1"></i> ALL
-      </button>
-    </div>
-  </div>
-
-  {{#if opportunities.length}}
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <h2 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-400 mb-6 flex items-center">
+    <i class="fas fa-scroll text-yellow-400 mr-2"></i>
+    {{#if (eq role "organization")}}YOUR QUEST OFFERINGS{{else}}AVAILABLE QUESTS{{/if}}
+  </h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {{#if opportunities.length}}
     {{#each opportunities}}
-    <div class="bg-gray-800 border-2 border-{{mapCategoryColor tag}}-600 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all transform hover:scale-105 quest-card">
-      <div class="relative">
-        <div class="w-full h-40 bg-{{mapCategoryColor tag}}-900 opacity-50"></div>
-        <div class="absolute top-3 right-3 bg-{{mapCategoryColor tag}}-600 text-white text-xs font-bold px-3 py-1 rounded-lg shadow-lg border border-{{mapCategoryColor tag}}-500">
-          <i class="fas fa-gem mr-1"></i> +{{multiply duration 10}} XP
-        </div>
-        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-gray-900 to-transparent opacity-60"></div>
-      </div>
+    <div class="bg-gray-800 rounded-lg overflow-hidden border-2 border-indigo-700 shadow-md transform hover:scale-102 transition-transform">
+      <div class="h-28 bg-cover bg-center" style="background-image: url('/img/categories/{{tag}}.jpg');"></div>
       <div class="p-4">
-        <div class="flex justify-between items-start">
-          <h3 class="text-lg font-semibold text-{{mapCategoryColor tag}}-300">{{title}}</h3>
-          <span class="inline-block bg-{{mapCategoryColor tag}}-900 text-{{mapCategoryColor tag}}-300 text-xs px-3 py-1 rounded-lg border border-{{mapCategoryColor tag}}-600">
-            <i class="{{mapCategoryIcon tag}} mr-1"></i> {{uppercase tag}}
-          </span>
+        <div class="flex items-center mb-2">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center bg-{{mapCategoryColor tag}}-900 border border-{{mapCategoryColor tag}}-700 mr-2">
+            <i class="{{mapCategoryIcon tag}} text-{{mapCategoryColor tag}}-400"></i>
+          </div>
+          <span class="text-xs font-semibold text-{{mapCategoryColor tag}}-400 uppercase tracking-wider">{{tag}}</span>
+          <span class="ml-auto text-xs text-blue-300">{{formatDate dateTime 'MMM D, YYYY'}}</span>
         </div>
-        <p class="text-sm text-blue-300 mt-2 flex items-center">
-          <i class="fas fa-clock mr-1"></i> {{formatDate dateTime "MMM DD, YYYY - h:mm A"}}
-        </p>
-        <p class="text-gray-300 my-3 line-clamp-2">{{description}}</p>
-        <div class="flex items-center justify-between mt-4">
-          <div class="flex items-center text-sm text-gray-400">
-            <i class="fas fa-map-marker-alt mr-1 text-{{mapCategoryColor tag}}-400"></i> {{location}}
+        <h3 class="text-lg font-semibold text-blue-300 mb-1">{{title}}</h3>
+        <p class="text-gray-400 text-sm mb-3 line-clamp-2">{{description}}</p>
+        <div class="flex justify-between items-center">
+          <div class="flex items-center">
+            <i class="fas fa-clock text-green-400 mr-1"></i>
+            <span class="text-xs text-gray-300">{{duration}} hrs</span>
           </div>
           <a href="/opportunities/{{_id}}" class="text-{{mapCategoryColor tag}}-400 hover:text-{{mapCategoryColor tag}}-300 font-medium flex items-center game-btn px-3 py-1 rounded-lg border border-{{mapCategoryColor tag}}-600 text-sm">
             VIEW QUEST <i class="fas fa-chevron-right ml-1 text-xs"></i>
@@ -480,4 +300,74 @@
       </div>
     {{/if}}
   </div>
-</div> 
+</div>
+
+<script>
+  // Quest details data - in a real app, this would come from the server
+  const questData = {
+    'environment': {
+      title: 'Nature Guardian',
+      hours: 24,
+      events: 5,
+      quests: [
+        { name: 'Park Cleanup', date: '2025-03-15', hours: 4 },
+        { name: 'Tree Planting', date: '2025-03-01', hours: 6 },
+        { name: 'Beach Cleanup', date: '2025-02-20', hours: 5 },
+        { name: 'Wildlife Sanctuary', date: '2025-02-05', hours: 9 }
+      ]
+    },
+    'education': {
+      title: 'Knowledge Sage',
+      hours: 18,
+      events: 4,
+      quests: [
+        { name: 'Tutoring Session', date: '2025-03-10', hours: 6 },
+        { name: 'Library Helper', date: '2025-02-25', hours: 4 },
+        { name: 'Coding Workshop', date: '2025-02-15', hours: 8 }
+      ]
+    },
+    'community': {
+      title: 'Unity Weaver',
+      hours: 32,
+      events: 7,
+      quests: [
+        { name: 'Food Bank', date: '2025-03-20', hours: 5 },
+        { name: 'Community Garden', date: '2025-03-05', hours: 6 },
+        { name: 'Elderly Care', date: '2025-02-28', hours: 8 },
+        { name: 'Neighborhood Cleanup', date: '2025-02-10', hours: 7 },
+        { name: 'Community Center', date: '2025-01-30', hours: 6 }
+      ]
+    }
+  };
+
+  function showQuestDetails(category) {
+    const data = questData[category] || { title: 'Unknown Category', hours: 0, events: 0, quests: [] };
+    const detailsSection = document.getElementById('quest-details');
+    const titleElement = document.getElementById('quest-title');
+    const hoursElement = document.getElementById('quest-hours');
+    const eventsElement = document.getElementById('quest-events');
+    const questListElement = document.getElementById('quest-list');
+    
+    // Update the details
+    titleElement.textContent = data.title;
+    hoursElement.textContent = data.hours;
+    eventsElement.textContent = data.events;
+    
+    // Update the quest list
+    if (data.quests && data.quests.length > 0) {
+      let questsHTML = '';
+      data.quests.forEach(quest => {
+        questsHTML += `<div class="p-2 bg-gray-800 rounded mb-1 flex justify-between">
+          <span>${quest.name}</span>
+          <span class="text-green-400">${quest.hours}h</span>
+        </div>`;
+      });
+      questListElement.innerHTML = questsHTML;
+    } else {
+      questListElement.innerHTML = '<div class="p-2 bg-gray-800 rounded mb-1">No quests completed yet</div>';
+    }
+    
+    // Show the details section
+    detailsSection.classList.remove('hidden');
+  }
+</script> 
